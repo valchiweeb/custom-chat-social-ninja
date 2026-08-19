@@ -1,10 +1,11 @@
 import React from 'react'
-import { useTheme, AvatarPosition, AnimationType } from '../context/ThemeContext'
 import { Download, Palette, Type, Layout, Image as ImageIcon, Zap, DollarSign } from 'lucide-react'
 import { generateCSS } from '../utils/cssGenerator'
+import { useThemeStore } from '@renderer/hooks/useTheme'
+import { AnimationType, AvatarPosition } from '@renderer/interfaces/AvatarInterface'
 
 const Sidebar: React.FC = () => {
-  const { theme, updateTheme, resetTheme } = useTheme()
+  const { theme, updateTheme, resetTheme } = useThemeStore()
 
   const handleCopyCSS = (): void => {
     const css = generateCSS(theme)

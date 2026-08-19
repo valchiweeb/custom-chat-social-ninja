@@ -1,24 +1,25 @@
 import React, { useRef, useEffect } from 'react'
-import { useTheme } from '../context/ThemeContext'
+// import { useTheme } from '../context/ThemeContext'
 import { generateCSS } from '../utils/cssGenerator'
+import { useThemeStore } from '@renderer/hooks/useTheme'
 
 interface OverlayWindowProps {
   style?: React.CSSProperties
 }
 
 const OverlayWindow: React.FC<OverlayWindowProps> = ({ style }) => {
-  const { theme } = useTheme()
+  // const { theme } = useTheme()
+  const { theme } = useThemeStore()
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
     const iframe = iframeRef.current
     if (!iframe) return
 
-    const injectCSS = () => {
+    const injectCSS = (): void => {
       try {
         const doc = iframe.contentDocument || iframe.contentWindow?.document
         if (doc) {
-          // Remove existing injected style if any
           const existingStyle = doc.getElementById('rv-injected-style')
           if (existingStyle) {
             existingStyle.remove()
@@ -34,10 +35,8 @@ const OverlayWindow: React.FC<OverlayWindowProps> = ({ style }) => {
       }
     }
 
-    const handleLoad = () => injectCSS()
+    const handleLoad = (): void => injectCSS()
     iframe.addEventListener('load', handleLoad)
-    
-    // Attempt injection immediately in case it's already loaded
     injectCSS()
 
     return () => {
@@ -57,7 +56,14 @@ const OverlayWindow: React.FC<OverlayWindowProps> = ({ style }) => {
     <iframe
       ref={iframeRef}
       src={`https://socialstream.ninja/chat.html?session=${theme.sessionId}`}
-      style={{ width: '100%', height: '100%', background: 'transparent', display: 'flex', border: 'none', ...style }}
+      style={{
+        width: '100%',
+        height: '100%',
+        background: 'transparent',
+        display: 'flex',
+        border: 'none',
+        ...style
+      }}
       allow="autoplay; fullscreen"
     />
   )

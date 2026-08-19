@@ -1,6 +1,6 @@
 import React from 'react'
-import { useTheme } from '../context/ThemeContext'
 import { getThemeCSSVariables } from '../utils/cssGenerator'
+import { useThemeStore } from '@renderer/hooks/useTheme'
 
 const fakeMessages = [
   {
@@ -51,7 +51,7 @@ const fakeMessages = [
 ]
 
 const PreviewPanel: React.FC = () => {
-  const { theme } = useTheme()
+  const { theme } = useThemeStore()
 
   // Apply theme variables dynamically to this container only
   const styleVars = getThemeCSSVariables(theme) as React.CSSProperties
@@ -72,10 +72,10 @@ const PreviewPanel: React.FC = () => {
           >
             <div className="hl-firstline">
               {theme.avatarPosition !== 'hidden' && (
-                <img 
-                  className={`chat-avatar avatar-${theme.avatarPosition}`} 
-                  src={msg.avatar} 
-                  alt="avatar" 
+                <img
+                  className={`chat-avatar avatar-${theme.avatarPosition}`}
+                  src={msg.avatar}
+                  alt="avatar"
                 />
               )}
               <span className="hl-name">{msg.author}</span>
@@ -95,11 +95,9 @@ const PreviewPanel: React.FC = () => {
                 </span>
               )}
             </div>
-            
+
             <div className={theme.textLimitMode ? 'truncate-text' : ''}>
-              <div className="hl-message">
-                {msg.text}
-              </div>
+              <div className="hl-message">{msg.text}</div>
             </div>
           </div>
         ))}
