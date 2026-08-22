@@ -1,4 +1,4 @@
-import { AnimationType, AvatarPosition } from '@renderer/context/ThemeContext'
+import { AnimationType, AvatarPosition } from './AvatarInterface'
 
 export interface ThemeConfig {
   backgroundColor: string
@@ -72,12 +72,4 @@ export const defaultTheme: ThemeConfig = {
 
   donationBackgroundColor: '#fbbf24',
   donationTextColor: '#000000'
-}
-
-export interface ThemeStoreType {
-  theme: ThemeConfig
-  updateTheme: (updates: Partial<ThemeConfig>) => void
-  exportTheme: () => string
-  importTheme: (jsonStr: string) => void
-  resetTheme: () => void
 }

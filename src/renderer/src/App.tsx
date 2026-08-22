@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
-// import { ThemeProvider } from './context/ThemeContext'
 import Sidebar from './components/Sidebar'
 import PreviewPanel from './components/PreviewPanel'
-import HomeDashboard from './components/HomeDashboard'
+import '../src/assets/main.css'
+import '@fontsource/fugaz-one'
+import '@fontsource/work-sans'
+import { useUIStore } from './hooks/useUIStore'
+import HomePage from './pages/Home'
 
 function App(): React.JSX.Element {
-  const [currentView, setCurrentView] = useState<'home' | 'builder'>('home')
+  const currentView = useUIStore((state) => state.currentView)
+  const setCurrentView = useUIStore((state) => state.setCurrentView)
 
   if (currentView === 'home') {
-    return <HomeDashboard onOpenBuilder={() => setCurrentView('builder')} />
+    return <HomePage />
   }
 
   return (
@@ -31,7 +35,7 @@ function App(): React.JSX.Element {
             zIndex: 100
           }}
         >
-          ← Back to Home
+          Back to Home
         </button>
       </main>
     </div>

@@ -8,7 +8,6 @@ interface OverlayWindowProps {
 }
 
 const OverlayWindow: React.FC<OverlayWindowProps> = ({ style }) => {
-  // const { theme } = useTheme()
   const { theme } = useThemeStore()
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
