@@ -18,8 +18,8 @@ const Button: React.FC<ButtonProps> = ({
     'flex items-center justify-center gap-2  rounded-lg font-bold cursor-pointer transition-colors duration-200'
 
   const variantClasses = {
-    primary: 'bg-amber-400 hover:bg-amber-500 text-slate-800',
-    copy: 'bg-amber-400 hover:bg-amber-500 text-slate-800'
+    primary: 'bg-amber-400  text-slate-800',
+    copy: 'bg-amber-400  text-slate-800'
   }
 
   const sizeClasses = {

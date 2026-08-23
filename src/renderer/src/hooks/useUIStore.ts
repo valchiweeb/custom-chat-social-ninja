@@ -1,8 +1,9 @@
+import { ViewState } from '@renderer/types/View'
 import { create } from 'zustand'
 
 interface UIStore {
-  currentView: 'home' | 'builder'
-  setCurrentView: (view: 'home' | 'builder') => void
+  currentView: ViewState
+  setCurrentView: (view: ViewState) => void
 }
 export const useUIStore = create<UIStore>()((set) => ({
   currentView: 'home',
