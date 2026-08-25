@@ -1,7 +1,4 @@
-import { useTransform } from 'motion/react'
 import React, { useState, MouseEvent } from 'react'
-import { ImCross } from 'react-icons/im'
-import { LuCross } from 'react-icons/lu'
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
 import FloatingCross from './FloatingCross'
 import { DECORATIONS } from '@renderer/constants/HomeConst'
