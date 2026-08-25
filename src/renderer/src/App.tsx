@@ -1,46 +1,30 @@
 import React, { useState } from 'react'
-import { ThemeProvider } from './context/ThemeContext'
 import Sidebar from './components/Sidebar'
 import PreviewPanel from './components/PreviewPanel'
-import HomeDashboard from './components/HomeDashboard'
+import '../src/assets/main.css'
+import '@fontsource/fugaz-one'
+import '@fontsource/work-sans'
+import { useUIStore } from './hooks/useUIStore'
+import HomePage from './pages/Home'
+import DefaultLayout from './components/layouts/DefaultLayout'
+import BuilderPage from './pages/Builder'
 
 function App(): React.JSX.Element {
-  const [currentView, setCurrentView] = useState<'home' | 'builder'>('home')
-
-  if (currentView === 'home') {
-    return (
-      <ThemeProvider>
-        <HomeDashboard onOpenBuilder={() => setCurrentView('builder')} />
-      </ThemeProvider>
-    )
-  }
+  const currentView = useUIStore((state) => state.currentView)
 
   return (
-    <ThemeProvider>
-      <div className="app-container">
-        <Sidebar />
-        <main className="main-content">
-          <PreviewPanel />
-          <button 
-            onClick={() => setCurrentView('home')}
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '20px',
-              padding: '10px 20px',
-              background: 'rgba(0,0,0,0.5)',
-              border: '1px solid var(--border-color)',
-              color: 'white',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              zIndex: 100
-            }}
-          >
-            ← Back to Home
-          </button>
-        </main>
-      </div>
-    </ThemeProvider>
+    <DefaultLayout>
+      {currentView === 'home' ? (
+        <HomePage />
+      ) : (
+        <div className="flex w-full h-[100vh] gap-6 bg-white/60 backdrop-blur-md rounded-4xl border-4 border-black overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Sidebar />
+          <main className="flex-1 p-6 relative w-full">
+            <BuilderPage />
+          </main>
+        </div>
+      )}
+    </DefaultLayout>
   )
 }
 

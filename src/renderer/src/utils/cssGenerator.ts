@@ -1,4 +1,4 @@
-import { ThemeConfig } from '../context/ThemeContext'
+import { ThemeConfig } from '@renderer/interfaces/ThemeInterface'
 
 /**
  * Returns React inline style variables mapped from the theme config
@@ -62,8 +62,8 @@ export const generateCSS = (theme: ThemeConfig): string => {
     .map(([key, value]) => `  ${key}: ${value};`)
     .join('\n')
 
-  return `/* 
-* Custom Chat Overlay - Ruang Visual 
+  return `/*
+* Custom Chat Overlay - Ruang Visual
 * Generated for Social Stream Ninja
 */
 
@@ -276,14 +276,14 @@ ${
 .platform-icon, img.chat-icon, .icon { display: none !important; }
 `
     : `
-.platform-icon, img.chat-icon, .icon { 
-  width: 16px !important; 
-  height: 16px !important; 
-  border-radius: 0 !important; 
-  position: absolute !important; 
+.platform-icon, img.chat-icon, .icon {
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 0 !important;
+  position: absolute !important;
   top: 12px !important;
   right: 12px !important;
-  transform: none !important; 
+  transform: none !important;
 }
 `
 }
